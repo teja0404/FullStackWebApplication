@@ -20,6 +20,10 @@ Repository for Full Stack Web application in GO
 - https://github.com/lib/pq -- Drivers for postgres
 - GO ORM - https://gorm.io/
 - Gin - https://gin-gonic.com/docs/
+
+## Important Links:
+
+- https://pkg.go.dev/github.com/gin-gonic/gin#H
 - 
 
 ## New terms:
@@ -28,6 +32,6 @@ Repository for Full Stack Web application in GO
   - https://betterprogramming.pub/closures-made-simple-with-golang-69db3017cd7b
 - FMT - Formatted I/O
 - Struct - Class in Java
-- panic 
 
-- 
+- Context
+  - context is a standard package of Golang that makes it easy to pass request-scoped values, cancelation signals, and deadlines across API boundaries to all the goroutines involved in handling a request.
