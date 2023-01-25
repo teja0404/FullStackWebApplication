@@ -31,6 +31,8 @@ Repository for Full Stack Web application in GO
 - https://pkg.go.dev/github.com/gin-gonic/gin#H
 - https://go.dev/doc/code
 - https://go.dev/doc/gopath_code
+- Connecting to postgres DB : https://gorm.io/docs/connecting_to_the_database.html#PostgreSQL
+- https://gorm.io/docs/query.html
 
 ## New terms:
 

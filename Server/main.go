@@ -1,25 +1,30 @@
 package main
 
 import (
+	"Server/controllers"
 	"Server/initializers"
 	"fmt"
-	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
-func main() {
+var DB *gorm.DB
 
+func init() {
 	fmt.Println("Hello, Modules!")
 	initializers.PrintHello()
 	initializers.LoadEnvVariables()
+	initializers.EstablishConnection()
+}
 
+func main() {
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
-	})
+	r.POST("/ping", controllers.PostRequest)
+	r.GET("/getall", controllers.GetAll)
+	r.GET("/get/:id", controllers.GetByIndex)
+	r.PUT("/update/:id", controllers.UpdateByIndex)
+	r.DELETE("/delete/:id", controllers.DeleteByIndex)
 
 	r.Run()
 
