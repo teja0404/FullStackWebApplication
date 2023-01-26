@@ -1,11 +1,12 @@
 package controllers
 
 import (
-	"Server/initializers"
-	"Server/models"
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"net/http"
+	"server/initializers"
+	"server/models"
+
+	"github.com/gin-gonic/gin"
 )
 
 func PostRequest(c *gin.Context) {
@@ -83,7 +84,7 @@ func GetByIndex(c *gin.Context) {
 
 func UpdateByIndex(c *gin.Context) {
 	id := c.Param("id")
-	var Student models.Student
+	var student models.Student
 
 	var Body struct {
 		Name string
@@ -91,9 +92,6 @@ func UpdateByIndex(c *gin.Context) {
 	}
 
 	c.Bind(&Body)
-
-	fmt.Println("Id is below")
-	fmt.Println(id)
 
 	if initializers.DB == nil {
 		initializers.DB = initializers.EstablishConnection()
@@ -104,8 +102,8 @@ func UpdateByIndex(c *gin.Context) {
 		return
 	}
 
-	initializers.DB.First(&Student, "id = ?", id)
-	initializers.DB.Model(&Student).Where("id = ?", id).Update(Body.Name, Body.Age)
+	initializers.DB.First(&student, "id = ?", id)
+	initializers.DB.Model(&student).Where("id = ?", id).Update(Body.Name, Body.Age)
 
 }
 

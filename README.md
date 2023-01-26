@@ -4,7 +4,7 @@ Repository for Full Stack Web application in GO
 ## Frameworks used:
 
 - Gin - GO framework
-- React for frontend()
+- React for frontend (Hooks)
 - Postgres for DB
 - OAUTH2*
 - JWT*
@@ -25,6 +25,8 @@ Repository for Full Stack Web application in GO
 - https://go.dev/doc/
 - GO ORM - https://gorm.io/
 - Gin - https://gin-gonic.com/docs/
+- React Hooks - https://www.freecodecamp.org/news/react-hooks-fundamentals/#:~:text=React%20Hooks%20are%20simple%20JavaScript,updater%20function%20to%20update%20it.
+- useStateHook - https://www.youtube.com/watch?v=O6P86uwfdR0
 
 ## Important Links:
 

@@ -1,10 +1,11 @@
 package main
 
 import (
-	"Server/controllers"
-	"Server/initializers"
 	"fmt"
+	"server/controllers"
+	"server/initializers"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
@@ -20,6 +21,7 @@ func init() {
 
 func main() {
 	r := gin.Default()
+	r.Use(cors.Default())
 	r.POST("/ping", controllers.PostRequest)
 	r.GET("/getall", controllers.GetAll)
 	r.GET("/get/:id", controllers.GetByIndex)

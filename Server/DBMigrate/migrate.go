@@ -1,8 +1,8 @@
 package main
 
 import (
-	"Server/initializers"
-	"Server/models"
+	"server/initializers"
+	"server/models"
 )
 
 //This is similar to Flyway migration for SpringBoot
