@@ -1,6 +1,16 @@
 # FullStackWebApplication
 Repository for Full Stack Web application in GO
 
+## Overview
+
+- Customers can login using Gmail (Oauth2)
+- View all the available courses
+- Add courses into cart
+- Remove courses from cart
+- Checkout the products in the cart
+- Users purchase history can be viewed
+- Only admin can add or update the courses
+
 ## Frameworks used:
 
 - Gin - GO framework
@@ -26,7 +36,8 @@ Repository for Full Stack Web application in GO
 - GO ORM - https://gorm.io/
 - Gin - https://gin-gonic.com/docs/
 - React Hooks - https://www.freecodecamp.org/news/react-hooks-fundamentals/#:~:text=React%20Hooks%20are%20simple%20JavaScript,updater%20function%20to%20update%20it.
-- useStateHook - https://www.youtube.com/watch?v=O6P86uwfdR0
+- useStateHook & useEffectHook - https://www.youtube.com/watch?v=O6P86uwfdR0
+- https://reactjs.org/docs/conditional-rendering.html
 
 ## Important Links:
 

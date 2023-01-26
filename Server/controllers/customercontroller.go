@@ -39,13 +39,13 @@ func AddCustomer(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"student": customer,
+		"customer": customer,
 	})
 }
 
 func GetAllCustomers(c *gin.Context) {
 
-	var allcustomer []models.Customer
+	var allcustomers []models.Customer
 
 	if initializers.DB == nil {
 		initializers.DB = initializers.EstablishConnection()
@@ -56,10 +56,10 @@ func GetAllCustomers(c *gin.Context) {
 		return
 	}
 
-	initializers.DB.Find(&allcustomer)
+	initializers.DB.Find(&allcustomers)
 
 	c.JSON(http.StatusOK, gin.H{
-		"student": allcustomer,
+		"allcustomers": allcustomers,
 	})
 }
 
@@ -80,7 +80,7 @@ func GetCustomerById(c *gin.Context) {
 	initializers.DB.First(&customer, "id = ?", id)
 
 	c.JSON(http.StatusOK, gin.H{
-		"student": customer,
+		"customer": customer,
 	})
 }
 

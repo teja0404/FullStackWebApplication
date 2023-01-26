@@ -1,9 +1,11 @@
 import './App.css';
-import Store from './store/Store';
+import Store from './components/Store';
+import Header from "./components/header";
 
 function App() {
   return (
-    <div>
+    <div className="App">
+      <Header />
       <Store />
     </div>
   );

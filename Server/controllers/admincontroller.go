@@ -40,6 +40,6 @@ func AddCourse(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"student": course,
+		"course": course,
 	})
 }

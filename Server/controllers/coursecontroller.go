@@ -52,11 +52,14 @@ func GetCourseById(c *gin.Context) {
 
 func UpdateCourseById(c *gin.Context) {
 	id := c.Param("id")
-	var student models.Course
+	var course models.Course
 
 	var Body struct {
-		Name string
-		Age  int
+		Name           string
+		InstructorName string
+		Price          int
+		Description    string
+		Duration       int
 	}
 
 	c.Bind(&Body)
@@ -70,8 +73,18 @@ func UpdateCourseById(c *gin.Context) {
 		return
 	}
 
-	initializers.DB.First(&student, "id = ?", id)
-	initializers.DB.Model(&student).Where("id = ?", id).Update(Body.Name, Body.Age)
+	initializers.DB.First(&course, "id = ?", id)
+	course.Name = Body.Name
+	course.InstructorName = Body.InstructorName
+	course.Price = Body.Price
+	course.Description = Body.Description
+	course.Duration = Body.Duration
+
+	initializers.DB.Save(&course)
+
+	c.JSON(http.StatusOK, gin.H{
+		"course": course,
+	})
 
 }
 
