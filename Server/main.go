@@ -22,6 +22,9 @@ func main() {
 	r := gin.Default()
 	r.Use(cors.Default())
 
+	//Health check
+	r.GET("/healthcheck", controllers.HealthCheck)
+
 	//Controllers related to Customers
 	r.POST("/addcustomer", controllers.AddCustomer)
 	r.GET("/getallcustomers", controllers.GetAllCustomers)

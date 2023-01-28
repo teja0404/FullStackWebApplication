@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./styles/List.css";
-import { v4 as uuidv4 } from 'uuid';
+import Modal from "./Modal"
+import "./styles/Store.css";
 
 const Store = () => {
     const [cart, setCart] = useState([]);
     const [items, setItems] = useState([]);
     const [cartTotal, setCartTotal] = useState(0);
     const [payButton, setPayButton] = useState(true)
+    const [payment, setPayment] = useState(false)
+    const [show, setShow] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
+
 
 
     useEffect(() => {
@@ -43,15 +48,15 @@ const Store = () => {
     }
 
     const cartItems = cart.map((el) => (
-        <div key={el.id}>
-          {`${el.name}: ${el.instructorName}`}
+        <div class = "list-items" key={el.id}>
+          {`${el.name} by ${el.instructorName}`}
           <input className="list-input" type="submit" value="remove" onClick={() => removeFromCart(el)} />
         </div>
       ));
     
      const listItems = items.map((el) => (
         <div key={el.id} className = "list">
-          {`${el.name}: ${el.instructorName} : ${el.price}`}
+          {`Name : ${el.name}, Instructor Name: ${el.instructorName}, Price: ${el.price}/-`}
           <input className="list-input" type="submit" value="add" onClick={() => addToCart(el)} />
         </div>
     ));
@@ -62,21 +67,25 @@ const Store = () => {
         setCart(hardCopy);
       };
 
-    
+      const handleClick = (e) => {
+        e.preventDefault();
+        console.log('The link was clicked.');
+      }
 
 
       return (
         <div>
-          <div><h1>Courses</h1></div>
+          <div className="Stores-body"><h1>Available Courses</h1></div>
           <div>{listItems}</div>
           <div><h1>Your cart</h1></div>
           <div>{cartItems}</div>
-          <div>Total: {cartTotal}</div>
+          <div class = "total">Total: {cartTotal}</div>
           <div>
-            <button disabled={payButton}>
+            <button class = "payment" disabled={payButton} onClick={() => {setModalOpen(true)}}>
               Proceed
             </button>
           </div>
+          {modalOpen && <Modal  setOpenModal={setModalOpen} cartTotal = {cartTotal}/>}
         </div>
       );
 }

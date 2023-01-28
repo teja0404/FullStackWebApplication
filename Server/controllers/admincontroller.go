@@ -9,6 +9,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+func HealthCheck(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{
+		"ping": "Fullstack Application BE is running",
+	})
+
+}
+
 func AddCourse(c *gin.Context) {
 
 	var requestbody struct {
