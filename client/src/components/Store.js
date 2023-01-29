@@ -50,14 +50,14 @@ const Store = () => {
     const cartItems = cart.map((el) => (
         <div class = "list-items" key={el.id}>
           {`${el.name} by ${el.instructorName}`}
-          <input className="list-input" type="submit" value="remove" onClick={() => removeFromCart(el)} />
+          <input className="list-input" type="submit" value="remove from cart" onClick={() => removeFromCart(el)} />
         </div>
       ));
     
      const listItems = items.map((el) => (
         <div key={el.id} className = "list">
           {`Name : ${el.name}, Instructor Name: ${el.instructorName}, Price: ${el.price}/-`}
-          <input className="list-input" type="submit" value="add" onClick={() => addToCart(el)} />
+          <input className="list-input" type="submit" value="add to cart" onClick={() => addToCart(el)} />
         </div>
     ));
 

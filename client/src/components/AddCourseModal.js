@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles/Header.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 function AddCourseModal({ setCourseModalOpen }) {
@@ -11,14 +11,16 @@ function AddCourseModal({ setCourseModalOpen }) {
     const [duration, setDuration] = useState("");
 
     const handleSubmit = (e) => {
+      console.log(e.courseName);
         e.preventDefault();
         axios
-           .post('https://localhost/8081/addcourse', {
-            name: "Block chain",
-            instructorName: "Suvadip",
-            price: 1200,
-            description: "Block chain development",
-            duration: 120,
+           .post('http://localhost:8081/addcourse', {
+            
+            name: name,
+            instructorName: instructorName,
+            price: Number(price),
+            description: description,
+            duration: Number(duration),
            })
            .then((res) => {
             setName('');
@@ -32,54 +34,6 @@ function AddCourseModal({ setCourseModalOpen }) {
            });
      };
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     console.log("Form submitted");
-    //     fetch('https://localhost/8081/addcourse', {
-    //        method: 'POST',
-    //        body: JSON.stringify({
-    //         name: "Block chain",
-    //         instructorName: "Suvadip",
-    //         price: 1200,
-    //         description: "Block chain development",
-    //         duration: 120,
-    //        }),
-    //        headers: {
-    //           'Content-type': 'application/json; charset=UTF-8',
-    //        },
-    //     })
-    //  };
-
-    // let handleSubmit = async (e) => {
-    //     console.log("Form submitted");
-    //     e.preventDefault();
-    //     try {
-    //       let res = await fetch("https://localhost/8081/addcourse", {
-    //         method: "POST",
-    //         body: JSON.stringify({
-    //           name: "Block chain",
-    //           instructorName: "Suvadip",
-    //           price: 1200,
-    //           description: "Block chain development",
-    //           duration: 120,
-    //         }),
-    //       });
-    //       let resJson = await res.json();
-    //       if (res.status === 200) {
-    //         setName("");
-    //         setInstructorName("");
-    //         setPrice("")
-    //         setDescription("")
-    //         setDuration("")
-
-    //       } else {
-    //         console.log("Some error while sending Post request");
-    //       }
-    //     } catch (err) {
-    //       console.log(err);
-    //     }
-    //   };
-
 
   return (
     <div className="modalBackground">
@@ -91,35 +45,36 @@ function AddCourseModal({ setCourseModalOpen }) {
         </div>
     <div>
       <form onSubmit={handleSubmit}>
-        <input
+      <input
           type="text"
           value={name}
-          placeholder="Name"
-          onChange={(e) => setName(e.target.name)}
+          placeholder="Course Name"
+          onChange={(e) => setName(e.target.value)}
         />
         <input
           type="text"
           value={instructorName}
           placeholder="InstructorName"
-          onChange={(e) => setInstructorName(e.target.instructorName)}
+          onChange={(e) => setInstructorName(e.target.value)}
         />
          <input
           type="text"
           value={price}
           placeholder="Price"
-          onChange={(e) => setPrice(e.target.price)}
+          onChange={(e) => setPrice(e.target.value)}
         />
+
         <input
           type="text"
           value={description}
           placeholder="Description"
-          onChange={(e) => setDescription(e.target.description)}
+          onChange={(e) => setDescription(e.target.value)}
         />       
         <input
           type="text"
           value={duration}
           placeholder="Duration"
-          onChange={(e) => setDuration(e.target.duration)}
+          onChange={(e) => setDuration(e.target.value)}
         />  
         <button type="submit">Create</button>
       </form>
@@ -133,11 +88,11 @@ function AddCourseModal({ setCourseModalOpen }) {
           >
             Cancel
           </button>
-          <button onClick={() => {
+          {/* <button onClick={() => {
                 setCourseModalOpen(false);
             }}>
             Ok
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

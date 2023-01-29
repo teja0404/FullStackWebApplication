@@ -15,4 +15,5 @@ func MigrateDatabases() {
 
 	initializers.DB.AutoMigrate(&models.Customer{})
 	initializers.DB.AutoMigrate(&models.Course{})
+	initializers.DB.AutoMigrate(&models.Payment{})
 }

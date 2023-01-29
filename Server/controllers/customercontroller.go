@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"server/initializers"
 	"server/models"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -137,4 +138,63 @@ func DeleteCustomerById(c *gin.Context) {
 	}
 
 	initializers.DB.Where("id = ?", id).Delete(&customer)
+}
+
+func MakePayment(c *gin.Context) {
+
+	var requestbody struct {
+		Name    string
+		Bill    int
+		Courses string
+	}
+
+	dt := time.Now()
+
+	//Format date
+	var date = dt.Format(time.UnixDate)
+
+	c.Bind(&requestbody)
+
+	payment := models.Payment{Name: requestbody.Name, Courses: requestbody.Courses, Bill: requestbody.Bill, Date: date}
+
+	if initializers.DB == nil {
+		initializers.DB = initializers.EstablishConnection()
+	}
+
+	if initializers.DB == nil {
+		fmt.Println("DB Connection is not established")
+		return
+	}
+
+	result := initializers.DB.Create(&payment)
+
+	if result.Error != nil {
+		c.Status(400)
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"payment": payment,
+	})
+}
+
+func GetPaymentsByName(c *gin.Context) {
+
+	name := c.Param("name")
+	var payments []models.Payment
+
+	if initializers.DB == nil {
+		initializers.DB = initializers.EstablishConnection()
+	}
+
+	if initializers.DB == nil {
+		fmt.Println("DB Connection is not established")
+		return
+	}
+
+	initializers.DB.Find(&payments, "name = ?", name)
+
+	c.JSON(http.StatusOK, gin.H{
+		"payments": payments,
+	})
 }

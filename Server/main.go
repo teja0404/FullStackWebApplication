@@ -31,6 +31,8 @@ func main() {
 	r.GET("/getcustomerbyid/:id", controllers.GetCustomerById)
 	r.PUT("/updatecustomerbyid/:id", controllers.UpdateCustomerById)
 	r.DELETE("/deletecustomerbyid/:id", controllers.DeleteCustomerById)
+	r.POST("/makepayment", controllers.MakePayment)
+	r.GET("/getpaymentsbyname/:name", controllers.GetPaymentsByName)
 
 	//Controllers related to Course
 	//Only admin can add the Course
