@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import "../components/styles/PaymentModal.css"
 
 function PaymentModal ({setPaymentModalOpen}) {
     const [name, setName] = useState("");
@@ -47,20 +48,10 @@ function PaymentModal ({setPaymentModalOpen}) {
             placeholder="Customer Name"
             onChange={(e) => setName(e.target.value)}
           />
-  
           <button type="submit">Get Transaction History for this customer</button>
         </form>
       </div>
           <div className="footer">
-            {/* <button
-              onClick={() => {
-                setPaymentModalOpen(false);
-                setPaymentsHistory(true);
-              }}
-              id="cancelBtn"
-            >
-              Cancel
-            </button> */}
             <button  disabled={showOkayButton} onClick={() => {
                   setPaymentModalOpen(false);
                   setPaymentsHistory(true);

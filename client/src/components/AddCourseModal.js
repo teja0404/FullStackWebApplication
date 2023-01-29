@@ -11,7 +11,6 @@ function AddCourseModal({ setCourseModalOpen }) {
     const [duration, setDuration] = useState("");
 
     const handleSubmit = (e) => {
-      console.log(e.courseName);
         e.preventDefault();
         axios
            .post('http://localhost:8081/addcourse', {

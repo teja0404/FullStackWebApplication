@@ -12,8 +12,8 @@ const Store = () => {
     const [payment, setPayment] = useState(false)
     const [show, setShow] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
-
-
+    var finalCourses;
+    var tempString;
 
     useEffect(() => {
         getAllOrders();
@@ -31,6 +31,8 @@ const Store = () => {
         let totalVal = 0;
         for (let i = 0; i < cart.length; i++) {
           totalVal += cart[i].price;
+          tempString = cart[i].name + "by"+ cart[i].instructorName;
+          finalCourses = finalCourses + tempString;
         }
         setCartTotal(totalVal);
         setPayButton(totalVal > 0 ? false : true);
@@ -56,8 +58,14 @@ const Store = () => {
     
      const listItems = items.map((el) => (
         <div key={el.id} className = "list">
-          {`Name : ${el.name}, Instructor Name: ${el.instructorName}, Price: ${el.price}/-`}
+          <div className = "list-details">
+              <div className = "list-details-title"><strong>Name</strong> : {`${el.name}`}, </div>
+              <div className = "list-details-title"><strong>Instructor Name</strong> : {`${el.instructorName}`}, </div>
+              <div className = "list-details-title"><strong>Price</strong> : {`${el.price}`}/-</div>
+          </div>
+          <div>
           <input className="list-input" type="submit" value="add to cart" onClick={() => addToCart(el)} />
+          </div>
         </div>
     ));
 
@@ -67,14 +75,8 @@ const Store = () => {
         setCart(hardCopy);
       };
 
-      const handleClick = (e) => {
-        e.preventDefault();
-        console.log('The link was clicked.');
-      }
-
-
       return (
-        <div>
+        <div className="store">
           <div className="Stores-body"><h1>Available Courses</h1></div>
           <div>{listItems}</div>
           <div><h1>Your cart</h1></div>
@@ -85,7 +87,7 @@ const Store = () => {
               Proceed
             </button>
           </div>
-          {modalOpen && <Modal  setOpenModal={setModalOpen} cartTotal = {cartTotal}/>}
+          {modalOpen && <Modal  setOpenModal={setModalOpen} cartTotal = {cartTotal} finalCourses =  {finalCourses}/>}
         </div>
       );
 }

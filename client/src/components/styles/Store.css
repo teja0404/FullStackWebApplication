@@ -1,3 +1,23 @@
 Stores-body {
     margin-left: 100px;
 }
+
+.store{
+    margin-left: 120px;
+}
+.list-details {
+    display: flex;
+    flex-direction: row;
+}
+.list {
+    display: flex;
+    flex-direction: row;
+}
+
+.list-details-title {
+    padding-left: 5px;
+}
+
+strong {
+    color:black
+}
