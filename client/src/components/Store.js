@@ -12,8 +12,9 @@ const Store = () => {
     const [payment, setPayment] = useState(false)
     const [show, setShow] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
-    var finalCourses;
+    const [finalCourses, setFinalCourses] = useState();
     var tempString;
+    var tempFinalString;
 
     useEffect(() => {
         getAllOrders();
@@ -31,11 +32,17 @@ const Store = () => {
         let totalVal = 0;
         for (let i = 0; i < cart.length; i++) {
           totalVal += cart[i].price;
-          tempString = cart[i].name + "by"+ cart[i].instructorName;
-          finalCourses = finalCourses + tempString;
+          tempString = cart[i].name + " by "+ cart[i].instructorName;
+          tempFinalString = finalCourses;
+          if(tempFinalString == null) {
+            tempFinalString = tempString;
+          } else {
+            tempFinalString = tempFinalString +" , "+ tempString;
+          }
         }
         setCartTotal(totalVal);
         setPayButton(totalVal > 0 ? false : true);
+        setFinalCourses(tempFinalString);
       };
     
     function getAllOrders(){
@@ -87,7 +94,7 @@ const Store = () => {
               Proceed
             </button>
           </div>
-          {modalOpen && <Modal  setOpenModal={setModalOpen} cartTotal = {cartTotal} finalCourses =  {finalCourses}/>}
+          {modalOpen && <Modal  setOpenModal={setModalOpen} cartTotal = {cartTotal} finalCourses = {finalCourses}/>}
         </div>
       );
 }

@@ -1,16 +1,14 @@
 package main
 
+//This will act as Controller class
 import (
-	"server/controllers"
 	"server/initializers"
 	"server/migration"
+	"server/service"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"gorm.io/gorm"
 )
-
-var DB *gorm.DB
 
 func init() {
 	initializers.PrintHello()
@@ -19,30 +17,36 @@ func init() {
 }
 
 func main() {
+	//Get the default Gin router
 	r := gin.Default()
+
+	// cors.Default() setup the middleware with default options.
+	// Accepts requests (GET, POST, PUT, DELETE) from all origins
 	r.Use(cors.Default())
 
 	//Health check
-	r.GET("/healthcheck", controllers.HealthCheck)
+	//To check whether application is running or not
+	r.GET("/healthcheck", service.HealthCheck)
 
 	//Controllers related to Customers
-	r.POST("/addcustomer", controllers.AddCustomer)
-	r.GET("/getallcustomers", controllers.GetAllCustomers)
-	r.GET("/getcustomerbyid/:id", controllers.GetCustomerById)
-	r.PUT("/updatecustomerbyid/:id", controllers.UpdateCustomerById)
-	r.DELETE("/deletecustomerbyid/:id", controllers.DeleteCustomerById)
-	r.POST("/makepayment", controllers.MakePayment)
-	r.GET("/getpaymentsbyname/:name", controllers.GetPaymentsByName)
+	r.POST("/addcustomer", service.AddCustomer)
+	r.GET("/getallcustomers", service.GetAllCustomers)
+	r.GET("/getcustomerbyid/:id", service.GetCustomerById)
+	r.PUT("/updatecustomerbyid/:id", service.UpdateCustomerById)
+	r.DELETE("/deletecustomerbyid/:id", service.DeleteCustomerById)
+	r.POST("/makepayment", service.MakePayment)
+	r.GET("/getpaymentsbyname/:name", service.GetPaymentsByName)
 
 	//Controllers related to Course
 	//Only admin can add the Course
-	r.POST("/addcourse", controllers.AddCourse)
+	// r.POST("/addcourse", controllers.AddCourse)
 
-	r.GET("/getallcourses", controllers.GetAllCourses)
-	r.GET("/getcoursebyid/:id", controllers.GetCourseById)
-	r.PUT("/updatecoursebyid/:id", controllers.UpdateCourseById)
-	r.DELETE("/deletecoursebyid/:id", controllers.DeleteCourseById)
+	r.POST("/addcourse", service.AddCourse)
+	r.GET("/getallcourses", service.GetAllCourses)
+	r.GET("/getcoursebyid/:id", service.GetCourseById)
+	r.PUT("/updatecoursebyid/:id", service.UpdateCourseById)
+	r.DELETE("/deletecoursebyid/:id", service.DeleteCourseById)
 
+	//Runs on the Port which we configured in Env file
 	r.Run()
-
 }

@@ -3,12 +3,18 @@ import "./styles/Header.css";
 import { useState } from "react";
 import axios from "axios";
 
+
+
 function AddCourseModal({ setCourseModalOpen }) {
     const [name, setName] = useState("");
     const [instructorName, setInstructorName] = useState("");
     const [price, setPrice] = useState("");
     const [description, setDescription] = useState("");
     const [duration, setDuration] = useState("");
+
+    const setModalclose = () => {
+      setCourseModalOpen(false);
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -75,7 +81,8 @@ function AddCourseModal({ setCourseModalOpen }) {
           placeholder="Duration"
           onChange={(e) => setDuration(e.target.value)}
         />  
-        <button type="submit">Create</button>
+        <button type="submit"  onClick={() => { setTimeout(setModalclose, 500); }}>
+          Create</button>
       </form>
     </div>
         <div className="footer">

@@ -6,8 +6,14 @@ function Modal({ setOpenModal, cartTotal, finalCourses }) {
 
   const [name, setName] = useState([]);
 
+  const setModalclose = () => {
+    setOpenModal(false);
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Inside Post API for make payment");
+    console.log(finalCourses)
     axios
        .post('http://localhost:8081/makepayment', {
         name: name,
@@ -18,6 +24,8 @@ function Modal({ setOpenModal, cartTotal, finalCourses }) {
           console.log(err);
        });
  };
+
+ 
 
   return (
     <div className="modalBackground">
@@ -38,9 +46,8 @@ function Modal({ setOpenModal, cartTotal, finalCourses }) {
             placeholder="Enter your Name"
             onChange={(e) => setName(e.target.value)}
           />
-          <button type="submit" onClick={() => {
-            setOpenModal(false);
-          }}>Pay & Get invoice on this customer name</button>
+          <button type="submit" onClick={() => { setTimeout(setModalclose, 500); } }>
+            Pay & Get invoice on this customer name</button>
         </form>
       </div>
         <div className="footer">
@@ -49,9 +56,7 @@ function Modal({ setOpenModal, cartTotal, finalCourses }) {
             id="cancelBtn">
             Cancel
           </button>
-          {/* <button  onClick={() => {
-            setOpenModal(false);
-          }}>Pay</button> */}
+
         </div>
 
       </div>

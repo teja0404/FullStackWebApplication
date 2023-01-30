@@ -9,7 +9,6 @@ import (
 
 func MigrateDatabases() {
 	if initializers.DB == nil {
-		initializers.LoadEnvVariables()
 		initializers.DB = initializers.EstablishConnection()
 	}
 
