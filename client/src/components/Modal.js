@@ -13,7 +13,37 @@ function Modal({ setOpenModal, cartTotal, finalCourses }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Inside Post API for make payment");
-    console.log(finalCourses)
+    
+    e.preventDefault();
+    if(cartTotal === ""){
+    alert("cartTotal is zero or null");
+    }else{
+      var options = {
+        key: "",
+        key_secret:"",
+        amount: cartTotal *100,
+        currency:"INR",
+        name:"Udemy",
+        description:"for testing purpose",
+        handler: function(response){
+          alert(response.razorpay_payment_id);
+        },
+        prefill: {
+          name:"Teja",
+          email:"tejailla0404@gmail.com",
+          contact:"9110321999"
+        },
+        notes:{
+          address:"Ganesh nagar, Tadepalligudem"
+        },
+        theme: {
+          color:"#3399cc"
+        }
+      };
+      var pay = new window.Razorpay(options);
+      pay.open();
+    }
+
     axios
        .post('http://localhost:8081/makepayment', {
         name: name,
@@ -43,11 +73,11 @@ function Modal({ setOpenModal, cartTotal, finalCourses }) {
         <input
             type="text"
             value={name}
-            placeholder="Enter your Name"
+            placeholder="Enter your Name to get invoice on this customer name"
             onChange={(e) => setName(e.target.value)}
           />
           <button type="submit" onClick={() => { setTimeout(setModalclose, 500); } }>
-            Pay & Get invoice on this customer name</button>
+            Pay </button>
         </form>
       </div>
         <div className="footer">
