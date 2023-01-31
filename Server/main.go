@@ -11,8 +11,8 @@ import (
 )
 
 func init() {
-	initializers.PrintHello()
 	initializers.LoadEnvVariables()
+	initializers.EstablishDBConnection()
 	migration.MigrateDatabases()
 }
 
@@ -39,8 +39,6 @@ func main() {
 
 	//Controllers related to Course
 	//Only admin can add the Course
-	// r.POST("/addcourse", controllers.AddCourse)
-
 	r.POST("/addcourse", service.AddCourse)
 	r.GET("/getallcourses", service.GetAllCourses)
 	r.GET("/getcoursebyid/:id", service.GetCourseById)

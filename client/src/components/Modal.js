@@ -1,11 +1,14 @@
 import React,{ useState } from "react";
 import "./styles/Header.css";
 import axios from "axios";
+import GooglePayButton from '@google-pay/button-react';
 
 function Modal({ setOpenModal, cartTotal, finalCourses }) {
 
   const [name, setName] = useState([]);
 
+  let text = cartTotal;
+ 
   const setModalclose = () => {
     setOpenModal(false);
   }
@@ -15,34 +18,6 @@ function Modal({ setOpenModal, cartTotal, finalCourses }) {
     console.log("Inside Post API for make payment");
     
     e.preventDefault();
-    if(cartTotal === ""){
-    alert("cartTotal is zero or null");
-    }else{
-      var options = {
-        key: "",
-        key_secret:"",
-        amount: cartTotal *100,
-        currency:"INR",
-        name:"Udemy",
-        description:"for testing purpose",
-        handler: function(response){
-          alert(response.razorpay_payment_id);
-        },
-        prefill: {
-          name:"Teja",
-          email:"tejailla0404@gmail.com",
-          contact:"9110321999"
-        },
-        notes:{
-          address:"Ganesh nagar, Tadepalligudem"
-        },
-        theme: {
-          color:"#3399cc"
-        }
-      };
-      var pay = new window.Razorpay(options);
-      pay.open();
-    }
 
     axios
        .post('http://localhost:8081/makepayment', {
@@ -86,10 +61,60 @@ function Modal({ setOpenModal, cartTotal, finalCourses }) {
             id="cancelBtn">
             Cancel
           </button>
-
         </div>
-
       </div>
+      <GooglePayButton
+        environment="TEST"
+        paymentRequest={{
+          apiVersion: 2,
+          apiVersionMinor: 0,
+          allowedPaymentMethods: [
+            {
+              type: 'CARD',
+              parameters: {
+                allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+                allowedCardNetworks: ['MASTERCARD', 'VISA'],
+              },
+              tokenizationSpecification: {
+                type: 'PAYMENT_GATEWAY',
+                parameters: {
+                  gateway: 'example',
+                  gatewayMerchantId: 'exampleGatewayMerchantId',
+                },
+              },
+            },
+          ],
+          merchantInfo: {
+            merchantId: '12345678901234567890',
+            merchantName: 'Demo Merchant',
+          },
+          transactionInfo: {
+            totalPriceStatus: 'FINAL',
+            totalPriceLabel: 'Total',
+            totalPrice: text,
+            currencyCode: 'USD',
+            countryCode: 'US',
+          },
+          shippingAddressRequired: true,
+          callbackIntents: ['SHIPPING_ADDRESS', 'PAYMENT_AUTHORIZATION'],
+        }}
+        onLoadPaymentData={paymentRequest => {
+          console.log('Success', paymentRequest);
+        }}
+        onPaymentAuthorized={paymentData => {
+            console.log('Payment Authorised Success', paymentData)
+            return { transactionState: 'SUCCESS'}
+          }
+        }
+        onPaymentDataChanged={paymentData => {
+            console.log('On Payment Data Changed', paymentData)
+            return { }
+          }
+        }
+        existingPaymentMethodRequired='false'
+        buttonColor='black'
+        buttonType='Buy'
+      />
     </div>
   );
 }

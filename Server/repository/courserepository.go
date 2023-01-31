@@ -1,7 +1,6 @@
 package repository
 
 import (
-	"fmt"
 	"net/http"
 	"server/initializers"
 	"server/models"
@@ -13,15 +12,6 @@ func GetAllCoursesFromDB(c *gin.Context) {
 
 	var allCourses []models.Course
 
-	if initializers.DB == nil {
-		initializers.DB = initializers.EstablishConnection()
-	}
-
-	if initializers.DB == nil {
-		fmt.Println("DB Connection is not established")
-		return
-	}
-
 	initializers.DB.Find(&allCourses)
 
 	c.JSON(http.StatusOK, gin.H{
@@ -31,15 +21,6 @@ func GetAllCoursesFromDB(c *gin.Context) {
 
 func GetCourseByIdFromDB(id string, c *gin.Context) {
 	var course models.Course
-
-	if initializers.DB == nil {
-		initializers.DB = initializers.EstablishConnection()
-	}
-
-	if initializers.DB == nil {
-		fmt.Println("DB Connection is not established")
-		return
-	}
 
 	initializers.DB.First(&course, "id = ?", id)
 
@@ -61,15 +42,6 @@ func UpdateCourseInDBById(id string, c *gin.Context) {
 
 	c.Bind(&Body)
 
-	if initializers.DB == nil {
-		initializers.DB = initializers.EstablishConnection()
-	}
-
-	if initializers.DB == nil {
-		fmt.Println("DB Connection is not established")
-		return
-	}
-
 	initializers.DB.First(&course, "id = ?", id)
 	course.Name = Body.Name
 	course.InstructorName = Body.InstructorName
@@ -87,15 +59,6 @@ func UpdateCourseInDBById(id string, c *gin.Context) {
 
 func DeleteCourseById(id string, c *gin.Context) {
 	var course models.Course
-
-	if initializers.DB == nil {
-		initializers.DB = initializers.EstablishConnection()
-	}
-
-	if initializers.DB == nil {
-		fmt.Println("DB Connection is not established")
-		return
-	}
 
 	initializers.DB.Where("id = ?", id).Delete(&course)
 }

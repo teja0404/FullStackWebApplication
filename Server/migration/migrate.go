@@ -9,7 +9,7 @@ import (
 
 func MigrateDatabases() {
 	if initializers.DB == nil {
-		initializers.DB = initializers.EstablishConnection()
+		initializers.DB = initializers.EstablishDBConnection()
 	}
 
 	initializers.DB.AutoMigrate(&models.Customer{})

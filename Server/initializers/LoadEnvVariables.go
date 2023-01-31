@@ -16,7 +16,3 @@ func LoadEnvVariables() {
 	}
 
 }
-
-func PrintHello() {
-	fmt.Println("Hello from initializers package")
-}
