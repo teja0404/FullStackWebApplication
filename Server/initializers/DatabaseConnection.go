@@ -17,7 +17,7 @@ func EstablishDBConnection() (DB *gorm.DB) {
 		return DB
 	}
 
-	fmt.Println("DB connection is not established. Trying to establish DB Connection")
+	fmt.Println("Trying to establish DB Connection")
 	dsn := os.Getenv("DB_URL")
 	DB, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
@@ -26,5 +26,7 @@ func EstablishDBConnection() (DB *gorm.DB) {
 		log.Fatal(err)
 		return nil
 	}
+
+	fmt.Println("DB connection establishment completed")
 	return DB
 }
