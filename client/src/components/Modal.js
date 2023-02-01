@@ -6,19 +6,14 @@ import GooglePayButton from '@google-pay/button-react';
 function Modal({ setOpenModal, cartTotal, finalCourses }) {
 
   const [name, setName] = useState([]);
-
-  let text = cartTotal;
+  let billAmount = cartTotal;
+  const [paymentOk, setPaymentOk] = useState(false);
  
   const setModalclose = () => {
     setOpenModal(false);
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Inside Post API for make payment");
-    
-    e.preventDefault();
-
+  const handleSubmit = () => {
     axios
        .post('http://localhost:8081/makepayment', {
         name: name,
@@ -30,7 +25,10 @@ function Modal({ setOpenModal, cartTotal, finalCourses }) {
        });
  };
 
- 
+ const refreshPage = () => { 
+  alert("Payment successful")
+  window.location.reload(); 
+}
 
   return (
     <div className="modalBackground">
@@ -51,8 +49,6 @@ function Modal({ setOpenModal, cartTotal, finalCourses }) {
             placeholder="Enter your Name to get invoice on this customer name"
             onChange={(e) => setName(e.target.value)}
           />
-          <button type="submit" onClick={() => { setTimeout(setModalclose, 500); } }>
-            Pay </button>
         </form>
       </div>
         <div className="footer">
@@ -91,8 +87,8 @@ function Modal({ setOpenModal, cartTotal, finalCourses }) {
           transactionInfo: {
             totalPriceStatus: 'FINAL',
             totalPriceLabel: 'Total',
-            totalPrice: text,
-            currencyCode: 'USD',
+            totalPrice: billAmount.toString(),
+            currencyCode: 'INR',
             countryCode: 'US',
           },
           shippingAddressRequired: true,
@@ -100,8 +96,10 @@ function Modal({ setOpenModal, cartTotal, finalCourses }) {
         }}
         onLoadPaymentData={paymentRequest => {
           console.log('Success', paymentRequest);
+          setPaymentOk(true);
         }}
         onPaymentAuthorized={paymentData => {
+          handleSubmit()
             console.log('Payment Authorised Success', paymentData)
             return { transactionState: 'SUCCESS'}
           }

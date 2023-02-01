@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  client:
+    build: ./client
+    ports:
+      - "3000:3000"
+    container_name: full-stack-webapplication-client
+    restart: always
+    links:
+      - server
+
+  server:
+    build: ./server
+    ports: 
+      - "8081:8081"
+    container_name: full-stack-webapplication-server
+    restart: always
