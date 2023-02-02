@@ -69,3 +69,13 @@
   #cancelBtn {
     background-color: crimson;
   }
+
+  .modalContainer .form {
+    background-color: red;
+  }
+
+  .form {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+  }

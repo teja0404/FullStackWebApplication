@@ -13,6 +13,7 @@ const Store = () => {
     const [show, setShow] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const [finalCourses, setFinalCourses] = useState();
+
     var tempString;
     var tempFinalString;
 
@@ -21,7 +22,19 @@ const Store = () => {
     }, [])
 
     const addToCart = (el) => {
+      let addToCart = true;
+
+      for(let i=0; i< cart.length; i++) {
+        if(cart[i].id == el.id) {
+          addToCart = false;
+        }
+      }
+
+      if(addToCart) {
         setCart([...cart, el]);
+      } else {
+        alert(`${el.name} by ${el.instructorName} is already in the cart. Please add another course`)
+      }
     };
 
     useEffect(() => {

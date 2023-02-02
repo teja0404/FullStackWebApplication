@@ -3,11 +3,11 @@ import "./styles/Header.css";
 import axios from "axios";
 import GooglePayButton from '@google-pay/button-react';
 
-function Modal({ setOpenModal, cartTotal, finalCourses }) {
+function Modal({ setOpenModal, cartTotal, finalCourses}) {
 
   const [name, setName] = useState([]);
   let billAmount = cartTotal;
-  const [paymentOk, setPaymentOk] = useState(false);
+  
  
   const setModalclose = () => {
     setOpenModal(false);
@@ -25,39 +25,34 @@ function Modal({ setOpenModal, cartTotal, finalCourses }) {
        });
  };
 
- const refreshPage = () => { 
-  alert("Payment successful")
-  window.location.reload(); 
-}
+
 
   return (
     <div className="modalBackground">
       <div className="modalContainer">
-        <div className="titleCloseBtn">
-        </div>
         <div className="title">
           <h1>Are You Sure You Want to proceed? </h1>
         </div>
         <div className="body">
-          <p>Your final billing amount is {cartTotal}</p>
+          <p>Your final billing amount is {cartTotal} /-</p>
         </div>
-        <div>
+        <div className="form">
         <form onSubmit={handleSubmit}>
         <input
             type="text"
             value={name}
-            placeholder="Enter your Name to get invoice on this customer name"
+            style = {{width:"300px"}}
+            placeholder="Enter your Name"
             onChange={(e) => setName(e.target.value)}
           />
         </form>
-      </div>
-        <div className="footer">
-          <button
+        <button
             onClick={() => {setOpenModal(false);}}
+            style = {{width:"100px", marginTop:"5px", marginBottom:"10px"}}
             id="cancelBtn">
             Cancel
           </button>
-        </div>
+      </div>
       </div>
       <GooglePayButton
         environment="TEST"
@@ -96,7 +91,6 @@ function Modal({ setOpenModal, cartTotal, finalCourses }) {
         }}
         onLoadPaymentData={paymentRequest => {
           console.log('Success', paymentRequest);
-          setPaymentOk(true);
         }}
         onPaymentAuthorized={paymentData => {
           handleSubmit()
