@@ -26,7 +26,7 @@ func HandleRequests() {
 	r.GET("/getcustomerbyid/:id", service.GetCustomerById)
 	r.PUT("/updatecustomerbyid/:id", service.UpdateCustomerById)
 	r.DELETE("/deletecustomerbyid/:id", service.DeleteCustomerById)
-	r.POST("/makepayment", service.MakePayment)
+	r.GET("/makepayment", service.MakePayment)
 	r.GET("/getpaymentsbyname/:name", service.GetPaymentsByName)
 
 	//Controllers related to Course
