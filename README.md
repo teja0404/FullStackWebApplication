@@ -2,7 +2,8 @@
 
 ## Dashboard
 
-![image-20230202210205564](C:\Users\IllaDurgaVaraSivaTej\AppData\Roaming\Typora\typora-user-images\image-20230202210205564.png)
+![image](https://user-images.githubusercontent.com/38076041/216379940-e771b858-2f91-48e8-900d-d81fcc2a0f7b.png)
+
 
 ## Starting the application
 
@@ -16,39 +17,39 @@ docker-compose up
 
 **Users can add the course by clicking on the `add to cart` button**
 
-![image-20230202211709528](C:\Users\IllaDurgaVaraSivaTej\AppData\Roaming\Typora\typora-user-images\image-20230202211709528.png)
+![image](https://user-images.githubusercontent.com/38076041/216380111-e8d4f9d2-88b9-49c0-ac5f-422bf2f345b0.png)
 
 **Course can be removed from the cart by clicking on `Remove from cart` button**
 
-![image-20230202211731794](C:\Users\IllaDurgaVaraSivaTej\AppData\Roaming\Typora\typora-user-images\image-20230202211731794.png)
+![image](https://user-images.githubusercontent.com/38076041/216380414-f881798d-132e-455b-801f-d1658b8d03d4.png)
 
 **On adding the desired courses he can click the `Proceed` button and he will be navigated to payment option section**
 
-![image-20230202210432218](C:\Users\IllaDurgaVaraSivaTej\AppData\Roaming\Typora\typora-user-images\image-20230202210432218.png)
+![image](https://user-images.githubusercontent.com/38076041/216380548-03723f2d-c06b-4ff5-a674-7882a1c1d2bc.png)
 
 **User should enter the name (Case sensitive & same will be reflected in the transaction history) and click on the `Gpay` button to open Payment gateway** 
 
-![image-20230202210459587](C:\Users\IllaDurgaVaraSivaTej\AppData\Roaming\Typora\typora-user-images\image-20230202210459587.png)
+![image](https://user-images.githubusercontent.com/38076041/216380683-23a3a84f-a6bd-474a-bb5d-4e8118cff612.png)
 
 **Check the final amount and click on `Pay`**
 
-![image-20230202210532581](C:\Users\IllaDurgaVaraSivaTej\AppData\Roaming\Typora\typora-user-images\image-20230202210532581.png)
+![image](https://user-images.githubusercontent.com/38076041/216380776-752e8381-bce1-478d-8a99-a4a8b6fbf0c6.png)
 
 **User can check his/her payment history by clicking on the `Get Purchase history of customer` button**
 
-![image-20230202210625698](C:\Users\IllaDurgaVaraSivaTej\AppData\Roaming\Typora\typora-user-images\image-20230202210625698.png)
+![image](https://user-images.githubusercontent.com/38076041/216380864-82df58f1-4128-4c0d-9fe2-9fea9c96ee58.png)
 
 **New course can be added by the Admin by entering all the required details**
 
-![image-20230202210822587](C:\Users\IllaDurgaVaraSivaTej\AppData\Roaming\Typora\typora-user-images\image-20230202210822587.png)
+![image](https://user-images.githubusercontent.com/38076041/216381169-627a3915-7807-4c12-af65-ac56d342c1b6.png)
 
 **Newly added courses will be automatically reflected in the available courses section**
 
-![image-20230202210949516](C:\Users\IllaDurgaVaraSivaTej\AppData\Roaming\Typora\typora-user-images\image-20230202210949516.png)
+![image](https://user-images.githubusercontent.com/38076041/216381250-cc0219f1-1322-4902-af29-5dcf29f08a62.png)
 
 **User cannot add the already existing course into the cart again**
 
-![image-20230202211034241](C:\Users\IllaDurgaVaraSivaTej\AppData\Roaming\Typora\typora-user-images\image-20230202211034241.png)
+![image](https://user-images.githubusercontent.com/38076041/216381348-c735d048-ee4a-4d6d-b1a8-149399320cfe.png)
 
 
 
