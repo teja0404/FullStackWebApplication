@@ -59,11 +59,6 @@ function Modal({ setOpenModal, cartTotal, finalCourses, name }) {
     }
   });
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log("You clicked submit.");
-    sendMsg("hello");
-  }
 
   const setModalclose = () => {
     setOpenModal(false);

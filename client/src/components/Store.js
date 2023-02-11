@@ -71,7 +71,8 @@ const Store = () => {
     }
 
     const cartItems = cart.map((el) => (
-        <div class = "list-items" key={el.id}>
+        <div class = "list-items" style = {{ display: "flex",alignItems :"flex-start"}}
+     key={el.id}>
           {`${el.name} by ${el.instructorName}`}
           <input className="list-input" type="submit" value="remove from cart" onClick={() => removeFromCart(el)} />
         </div>
@@ -102,9 +103,9 @@ const Store = () => {
 
       return (
         <div className="store">
-          <div className="Stores-body"><h1>Available Courses</h1></div>
+          <div className="Stores-body"><h2>Available Courses</h2></div>
           <div>{listItems}</div>
-          <div><h1>Your cart</h1></div>
+          <div ><h2>Your cart</h2></div>
           <div>{cartItems}</div>
           <div class = "total">Total: {cartTotal}</div>
           <form>
@@ -112,7 +113,7 @@ const Store = () => {
         <input
             type="text"
             value={name}
-            style = {{width:"300px"}}
+            style = {{width:"300px", height : "20px"}}
             placeholder="Please enter your Name before proceeding"
             onChange={(e) => setName(e.target.value)}
           />

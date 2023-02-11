@@ -89,7 +89,7 @@ func GetClientSecret(c *gin.Context) {
 
 		// Create a PaymentIntent with amount and currency
 		params := &stripe.PaymentIntentParams{
-			Amount:   stripe.Int64(int64(requestbody.Bill)),
+			Amount:   stripe.Int64(int64(requestbody.Bill * 100)),
 			Currency: stripe.String(string(stripe.CurrencyINR)),
 			AutomaticPaymentMethods: &stripe.PaymentIntentAutomaticPaymentMethodsParams{
 				Enabled: stripe.Bool(true),

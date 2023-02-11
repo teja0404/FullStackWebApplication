@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-
 import {
   PaymentElement,
   LinkAuthenticationElement,
@@ -19,10 +18,7 @@ export default function CheckoutForm({ cartTotal, finalCourses, name }) {
   const [paymentPersisted, setPaymentPersisted] = useState(false);
 
   const persistPayment = () => {
-    console.log("Persisting the payment")
-    console.log(name)
-    console.log(cartTotal)
-    console.log(finalCourses)
+    console.log("Persisting the payment in DB")
     axios
        .post('http://localhost:8081/makepayment', {
         name: name,
@@ -50,13 +46,7 @@ export default function CheckoutForm({ cartTotal, finalCourses, name }) {
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
-          // setMessage("Payment succeeded!");
-          if(!paymentPersisted) {
-            persistPayment();
-            setPaymentPersisted(true);
-          }
-
-          
+          setMessage("Payment successful")
           break;
         case "processing":
           setMessage("Your payment is processing.");
@@ -79,20 +69,15 @@ export default function CheckoutForm({ cartTotal, finalCourses, name }) {
     }
 
     setIsLoading(true);
+    persistPayment();
 
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        // Make sure to change this to your payment completion page
-        return_url: "http://localhost:3000",
+        return_url: "http://localhost:3000/paymentsuccess",
       },
     });
 
-    // This point will only be reached if there is an immediate error when
-    // confirming the payment. Otherwise, your customer will be redirected to
-    // your `return_url`. For some payment methods like iDEAL, your customer will
-    // be redirected to an intermediate site first to authorize the payment, then
-    // redirected to the `return_url`.
     if (error.type === "card_error" || error.type === "validation_error") {
       setMessage(error.message);
     } else {
