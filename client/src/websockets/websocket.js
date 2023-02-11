@@ -8,7 +8,8 @@ let connect = () => {
   };
 
   socket.onmessage = msg => {
-    console.log(msg);
+    console.log("Received the below message from server")
+    console.log(msg.data);
   };
 
   socket.onclose = event => {

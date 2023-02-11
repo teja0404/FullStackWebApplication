@@ -13,6 +13,7 @@ const Store = () => {
     const [show, setShow] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const [finalCourses, setFinalCourses] = useState();
+    const [name, setName] = useState([]);
 
     var tempString;
     var tempFinalString;
@@ -95,6 +96,10 @@ const Store = () => {
         setCart(hardCopy);
       };
 
+    const handleNameInput = () => {
+        setName(name);
+    };
+
       return (
         <div className="store">
           <div className="Stores-body"><h1>Available Courses</h1></div>
@@ -102,12 +107,24 @@ const Store = () => {
           <div><h1>Your cart</h1></div>
           <div>{cartItems}</div>
           <div class = "total">Total: {cartTotal}</div>
+          <form>
+        {!payButton && 
+        <input
+            type="text"
+            value={name}
+            style = {{width:"300px"}}
+            placeholder="Please enter your Name before proceeding"
+            onChange={(e) => setName(e.target.value)}
+          />
+        }
+        </form>
           <div>
             <button class = "payment" disabled={payButton} onClick={() => {setModalOpen(true)}}>
               Proceed
             </button>
           </div>
-          {modalOpen && <Modal  setOpenModal={setModalOpen} cartTotal = {cartTotal} finalCourses = {finalCourses}/>}
+
+          {modalOpen && <Modal  setOpenModal={setModalOpen} cartTotal = {cartTotal} finalCourses = {finalCourses} name = {name}/>}
         </div>
       );
 }

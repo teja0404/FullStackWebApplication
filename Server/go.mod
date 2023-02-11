@@ -9,6 +9,8 @@ require (
 	gorm.io/gorm v1.24.3
 )
 
+require github.com/stripe/stripe-go/v74 v74.7.0 // indirect
+
 require (
 	github.com/gin-contrib/cors v1.4.0
 	github.com/gin-contrib/sse v0.1.0 // indirect
