@@ -52,18 +52,21 @@ function AddCourseModal({ setCourseModalOpen }) {
       <form onSubmit={handleSubmit}>
       <input
           type="text"
+          style = {{margin : "10px", height : "20px", width : "250px"}}
           value={name}
           placeholder="Course Name"
           onChange={(e) => setName(e.target.value)}
         />
         <input
           type="text"
+          style = {{margin : "10px", height : "20px", width : "250px"}}
           value={instructorName}
           placeholder="InstructorName"
           onChange={(e) => setInstructorName(e.target.value)}
         />
          <input
           type="text"
+          style = {{margin : "10px", height: "20px", width : "250px"}}
           value={price}
           placeholder="Price"
           onChange={(e) => setPrice(e.target.value)}
@@ -71,12 +74,14 @@ function AddCourseModal({ setCourseModalOpen }) {
 
         <input
           type="text"
+          style = {{margin : "10px", height:"20px", width : "250px"}}
           value={description}
           placeholder="Description"
           onChange={(e) => setDescription(e.target.value)}
         />       
         <input
           type="text"
+          style = {{margin : "10px", height : "20px", width : "250px"}}
           value={duration}
           placeholder="Duration"
           onChange={(e) => setDuration(e.target.value)}
@@ -90,6 +95,7 @@ function AddCourseModal({ setCourseModalOpen }) {
             onClick={() => {
                 setCourseModalOpen(false);
             }}
+            style = {{backgroundColor : "white", width : "200px", color:"black", marginTop: "10px", marginLeft:"100px"}}
             id="cancelBtn"
           >
             Cancel

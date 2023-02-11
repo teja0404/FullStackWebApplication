@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+
+
 import {
   PaymentElement,
   LinkAuthenticationElement,
@@ -6,13 +9,30 @@ import {
   useElements
 } from "@stripe/react-stripe-js";
 
-export default function CheckoutForm() {
+export default function CheckoutForm({ cartTotal, finalCourses, name }) {
   const stripe = useStripe();
   const elements = useElements();
 
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [paymentPersisted, setPaymentPersisted] = useState(false);
+
+  const persistPayment = () => {
+    console.log("Persisting the payment")
+    console.log(name)
+    console.log(cartTotal)
+    console.log(finalCourses)
+    axios
+       .post('http://localhost:8081/makepayment', {
+        name: name,
+        bill : cartTotal,
+        courses : finalCourses
+       })
+       .catch((err) => {
+          console.log(err);
+       });
+ };
 
   useEffect(() => {
     if (!stripe) {
@@ -30,7 +50,13 @@ export default function CheckoutForm() {
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
-          setMessage("Payment succeeded!");
+          // setMessage("Payment succeeded!");
+          if(!paymentPersisted) {
+            persistPayment();
+            setPaymentPersisted(true);
+          }
+
+          
           break;
         case "processing":
           setMessage("Your payment is processing.");

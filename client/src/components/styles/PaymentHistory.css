@@ -1,4 +1,8 @@
 .Payment-History {
-    margin-top: 20px;
-    margin-left: 700px;
+    display:flex;
+    flex-direction: row;
+    margin-top:10px;
+    margin-left: 75%;
+    width:300px;
+    margin-right: 10px;
 }
