@@ -15,6 +15,7 @@ import (
 	"github.com/stripe/stripe-go/v74/paymentintent"
 )
 
+// Upgrade the connection to web socket
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:  1024,
 	WriteBufferSize: 1024,
@@ -56,7 +57,6 @@ func DeleteCustomerById(c *gin.Context) {
 }
 
 func GetClientSecret(c *gin.Context) {
-	fmt.Println("Received GetClientSecret Request")
 	stripe.Key = os.Getenv("STRIPE_SECRET_KEY")
 	ws, err := upgrader.Upgrade(c.Writer, c.Request, nil)
 	if err != nil {
@@ -78,8 +78,6 @@ func GetClientSecret(c *gin.Context) {
 			log.Println(err)
 			return
 		}
-		fmt.Println("Below is the string format of payload")
-		fmt.Println(string(p))
 
 		jsonErr := json.Unmarshal([]byte(string(p)), &requestbody)
 		if jsonErr != nil {
@@ -97,7 +95,6 @@ func GetClientSecret(c *gin.Context) {
 		}
 
 		pi, err := paymentintent.New(params)
-		log.Printf("pi.New: %v", pi.ClientSecret)
 
 		if err != nil {
 			log.Printf("pi.New: %v", err)

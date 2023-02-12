@@ -8,8 +8,7 @@ function PaymentModal ({setPaymentModalOpen}) {
     const [payments, setPayments] = useState([]);
     const [paymentsHistory, setPaymentsHistory] = useState([false]);
     const [showOkayButton, setShowOkayButton] = useState([true]);
-
-
+    
     const paymentsList = payments.map((el) => (
         <div key={el.id} className = "list">
           {`Name : ${el.name}, Courses: ${el.courses}, bill: ${el.bill}/-, Date Of Purchase: ${el.Date}`}
