@@ -11,8 +11,8 @@ function PaymentSuccess() {
         </div>
           <h1>Payment Successful</h1> 
           <h1>Thank you for shopping at Udemy</h1>
-          <form action="http://localhost:3000/">
-            <input type="submit" value="Go to Home" />
+          <form action="http://localhost:3000/" style={{paddingRight : "50px"}}>
+            <input style = {{margin: "20px", height : "50px", width : "300px", borderRadius : "4px"}} type="submit" value="Go to Home" />
             </form>
         </div>
         </div>

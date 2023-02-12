@@ -79,7 +79,7 @@ function Modal({ setOpenModal, cartTotal, finalCourses, name }) {
           <h1>Are You Sure You Want to proceed? </h1>
         </div>
         <div className="body">
-          <p>Your final billing amount is {cartTotal} /-</p>
+          <p style = {{color : "whitesmoke"}}>Your final billing amount is {cartTotal} /-</p>
         </div>
         <div className="form">
 

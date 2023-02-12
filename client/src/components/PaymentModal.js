@@ -41,18 +41,19 @@ function PaymentModal ({setPaymentModalOpen}) {
             <p>Please enter the name of the customer to get the details</p>
           </div>
       <div>
-        <form onSubmit={handleSubmit}>
+        <form  onSubmit={handleSubmit}>
         <input
+            style = {{height : "20px", width : "300px", transition:" width 0.4s ease-in-out"}}
             type="text"
             value={name}
             placeholder="Customer Name"
             onChange={(e) => setName(e.target.value)}
           />
-          <button type="submit">Get Transaction History for this customer</button>
+          <button type="submit" style = {{height : "50px", width : "225px", marginTop: "20px", marginBottom : "20px", fontSize : "15px"}}>Get Transaction History</button>
         </form>
       </div>
           <div className="footer">
-            <button  disabled={showOkayButton} onClick={() => {
+            <button style = {{marginTop: "15px"}} disabled={showOkayButton} onClick={() => {
                   setPaymentModalOpen(false);
                   setPaymentsHistory(true);
               }}>

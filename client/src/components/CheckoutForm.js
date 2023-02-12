@@ -46,7 +46,9 @@ export default function CheckoutForm({ cartTotal, finalCourses, name }) {
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
-          setMessage("Payment successful")
+          console.log("Inside payment status method")
+          persistPayment();
+          //setMessage("Payment successful")
           break;
         case "processing":
           setMessage("Your payment is processing.");
@@ -69,8 +71,7 @@ export default function CheckoutForm({ cartTotal, finalCourses, name }) {
     }
 
     setIsLoading(true);
-    persistPayment();
-
+  
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
