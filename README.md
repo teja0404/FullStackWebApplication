@@ -11,6 +11,9 @@ In the project root, run:
 ```
 docker-compose build 
 docker-compose up
+
+Use 4242 4242 4242 4242 as card number
+12/24 MM/YY and any 3 digit number as CVV
 ```
 
 ## Overview
