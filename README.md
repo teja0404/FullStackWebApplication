@@ -16,6 +16,16 @@ Use 4242 4242 4242 4242 as card number
 12/24 MM/YY and any 3 digit number as CVV
 ```
 
+## Payment screen 
+![image](https://user-images.githubusercontent.com/38076041/218306398-3c19a406-9c11-4c2c-a3a0-144a2541a3da.png)
+
+## Payment success screen
+![image](https://user-images.githubusercontent.com/38076041/218306423-4b635bfc-01a7-422d-83ed-daf86a8973c0.png)
+
+## Stripe dashboard
+![image](https://user-images.githubusercontent.com/38076041/218306460-c78eae94-8243-475f-a7e0-2cf325e970e7.png)
+
+
 ## Overview
 
 **Users can add the course by clicking on the `add to cart` button**
