@@ -1,5 +1,18 @@
 # FullStackWebApplication
 
+## Application is up and running and hosted using GCP Cloud run
+
+It can be accessed with the [link](https://fullstackwebapplication-client-nvywvuaozq-uc.a.run.app/)
+
+## Cloud Run Dashboard
+
+Both Client and Server images are running
+
+![image](https://user-images.githubusercontent.com/38076041/219547237-da9659b2-b56d-4cdb-84a0-558a8959f0a2.png)
+
+## Stripe webhook endpoint
+![image](https://user-images.githubusercontent.com/38076041/219547376-3a343cfe-0f92-49ec-b52f-f7c9c7199565.png)
+
 ## Dashboard
 
 ![image](https://user-images.githubusercontent.com/38076041/216379940-e771b858-2f91-48e8-900d-d81fcc2a0f7b.png)
