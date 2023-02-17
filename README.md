@@ -1,6 +1,6 @@
 # FullStackWebApplication
 
-## Application is up and running and hosted using GCP Cloud run
+## Application is up and hosted using GCP Cloud run
 
 It can be accessed with the [link](https://fullstackwebapplication-client-nvywvuaozq-uc.a.run.app/)
 
