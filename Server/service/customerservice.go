@@ -102,7 +102,14 @@ func GetClientSecret(c *gin.Context) {
 		}
 
 		ws.WriteMessage(messageType, []byte(pi.ClientSecret))
+		initiatePayment(requestbody.Name, requestbody.Courses, requestbody.Bill, "Processing", pi.ClientSecret)
 	}
+}
+
+func initiatePayment(Name string, Courses string, Bill int, Status string, ClientSecret string) {
+	dt := time.Now()
+	var date = dt.Format(time.UnixDate)
+	repository.InitiatePayment(Name, Courses, Bill, date, Status, ClientSecret)
 }
 
 func MakePayment(c *gin.Context) {

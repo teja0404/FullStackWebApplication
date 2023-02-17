@@ -12,12 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={ [<Header/>,<AddCourse/>,<PaymentHistory/>,<Store/>]} />
         <Route path="paymentsuccess" element={ <PaymentSuccess/> } />
-        {/* <Route path="contact" element={ <Contact/> } /> */}
       </Routes>
-      {/* <Header />
-      <AddCourse />
-      <PaymentHistory />
-      <Store /> */}
     </div>
   );
 }

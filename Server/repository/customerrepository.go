@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"fmt"
 	"net/http"
 	"server/initializers"
 	"server/models"
@@ -71,6 +72,26 @@ func UpdateCustomerById(id string, c *gin.Context) {
 	})
 }
 
+func UpdatePaymentToSuccess(clientsecret string) {
+	fmt.Println("Updating payment to success")
+	var payment models.Payment
+
+	initializers.DB.First(&payment, "client_secret = ?", clientsecret)
+	payment.Status = "Success"
+	initializers.DB.Save(&payment)
+
+}
+
+func UpdatePaymentToFailed(clientsecret string) {
+	fmt.Println("Updating payment to Failed")
+	var payment models.Payment
+
+	initializers.DB.First(&payment, "client_secret = ?", clientsecret)
+	payment.Status = "Failed"
+	initializers.DB.Save(&payment)
+
+}
+
 func DeleteCustomerById(id string, c *gin.Context) {
 	var customer models.Customer
 
@@ -92,10 +113,24 @@ func PersistPaymentInDB(Name string, Courses string, Bill int, Date string, c *g
 	})
 }
 
+func InitiatePayment(Name string, Courses string, Bill int, Date string, Status string, ClientSecret string) {
+	payment := models.Payment{Name: Name, Courses: Courses, Bill: Bill, Date: Date, Status: Status, ClientSecret: ClientSecret}
+
+	result := initializers.DB.Create(&payment)
+
+	if result.Error != nil {
+		fmt.Println("Error while initiating payment")
+		return
+	} else {
+		fmt.Println("Payment succesfully persisted")
+	}
+
+}
+
 func GetPaymentsByName(name string, c *gin.Context) {
 	var payments []models.Payment
 
-	initializers.DB.Find(&payments, "name = ?", name)
+	initializers.DB.Where("name = ? AND status = ?", name, "Success").Find(&payments)
 
 	c.JSON(http.StatusOK, gin.H{
 		"payments": payments,

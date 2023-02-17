@@ -17,19 +17,6 @@ export default function CheckoutForm({ cartTotal, finalCourses, name }) {
   const [isLoading, setIsLoading] = useState(false);
   const [paymentPersisted, setPaymentPersisted] = useState(false);
 
-  const persistPayment = () => {
-    console.log("Persisting the payment in DB")
-    axios
-       .post('http://localhost:8081/makepayment', {
-        name: name,
-        bill : cartTotal,
-        courses : finalCourses
-       })
-       .catch((err) => {
-          console.log(err);
-       });
- };
-
   useEffect(() => {
     if (!stripe) {
       return;
@@ -47,7 +34,6 @@ export default function CheckoutForm({ cartTotal, finalCourses, name }) {
       switch (paymentIntent.status) {
         case "succeeded":
           console.log("Inside payment status method")
-          persistPayment();
           //setMessage("Payment successful")
           break;
         case "processing":
@@ -65,25 +51,18 @@ export default function CheckoutForm({ cartTotal, finalCourses, name }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!stripe || !elements) {
       return;
     }
 
     setIsLoading(true);
   
-    const { error } = await stripe.confirmPayment({
+    const result  = await stripe.confirmPayment({
       elements,
       confirmParams: {
         return_url: "http://localhost:3000/paymentsuccess",
       },
     });
-
-    if (error.type === "card_error" || error.type === "validation_error") {
-      setMessage(error.message);
-    } else {
-      setMessage("An unexpected error occurred.");
-    }
 
     setIsLoading(false);
   };

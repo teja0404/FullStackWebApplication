@@ -19,7 +19,7 @@ function AddCourseModal({ setCourseModalOpen }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios
-           .post('http://localhost:8081/addcourse', {
+           .post('https://fullstackwebapplication-server-nvywvuaozq-uc.a.run.app/addcourse', {
             
             name: name,
             instructorName: instructorName,
@@ -95,7 +95,7 @@ function AddCourseModal({ setCourseModalOpen }) {
             onClick={() => {
                 setCourseModalOpen(false);
             }}
-            style = {{backgroundColor : "white", width : "200px", color:"black", marginTop: "10px", marginLeft:"100px"}}
+            style = {{backgroundColor : "white", width : "150px", color:"black", marginTop: "139px", marginLeft:"175px"}}
             id="cancelBtn"
           >
             Cancel

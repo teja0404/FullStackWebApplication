@@ -19,6 +19,7 @@ func HandleRequests() {
 	//Health check
 	//To check whether application is running or not
 	r.GET("/healthcheck", service.HealthCheck)
+	r.POST("/webhooks/stripe", service.HandleStripeWebhook)
 
 	//Controllers related to Customers
 	r.POST("/addcustomer", service.AddCustomer)

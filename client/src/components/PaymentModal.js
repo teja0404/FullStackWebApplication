@@ -19,7 +19,7 @@ function PaymentModal ({setPaymentModalOpen}) {
           e.preventDefault();
           setShowOkayButton(false)
           axios
-             .get('http://localhost:8081/getpaymentsbyname/'+name)
+             .get('https://fullstackwebapplication-server-nvywvuaozq-uc.a.run.app/getpaymentsbyname/'+name)
              .then((res) => {
               setName('');
               if(res.status == 200){
