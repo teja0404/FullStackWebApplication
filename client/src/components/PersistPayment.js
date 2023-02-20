@@ -4,7 +4,7 @@ import axios from "axios";
 function PersistPayment() {
     e.preventDefault();
     axios
-       .post('https://fullstackwebapplication-server-nvywvuaozq-uc.a.run.app/makepayment', {
+       .post('https://fullstackwebapplication-server-nvywvuaozq-uc.a.run.app/payment', {
         
         name: name,
         instructorName: instructorName,

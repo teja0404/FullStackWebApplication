@@ -5,5 +5,4 @@ CREATE TABLE IF NOT EXISTS courses(
    price integer,
    description VARCHAR (50) NOT NULL,
    duration integer
-   
 );

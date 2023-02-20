@@ -1,6 +1,6 @@
 package bo
 
-type Requestbody struct {
+type Course struct {
 	Name           string
 	InstructorName string
 	Price          int

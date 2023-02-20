@@ -3,6 +3,7 @@ package repository
 import (
 	"fmt"
 	"net/http"
+	"server/bo"
 	"server/initializers"
 	"server/models"
 
@@ -11,7 +12,6 @@ import (
 
 func AddCustomerInDB(Name string, Age int, Email string, Gender string, c *gin.Context) {
 	customer := models.Customer{Name: Name, Age: Age, Email: Email, Gender: Gender}
-
 	result := initializers.DB.Create(&customer)
 
 	if result.Error != nil {
@@ -28,7 +28,6 @@ func GetAllCustomersFromDB(c *gin.Context) {
 	var allcustomers []models.Customer
 
 	initializers.DB.Find(&allcustomers)
-
 	c.JSON(http.StatusOK, gin.H{
 		"allcustomers": allcustomers,
 	})
@@ -36,7 +35,6 @@ func GetAllCustomersFromDB(c *gin.Context) {
 
 func GetCustomerByID(id string, c *gin.Context) {
 	var customer models.Customer
-
 	initializers.DB.First(&customer, "id = ?", id)
 
 	c.JSON(http.StatusOK, gin.H{
@@ -46,24 +44,17 @@ func GetCustomerByID(id string, c *gin.Context) {
 
 func UpdateCustomerById(id string, c *gin.Context) {
 	var customer models.Customer
+	var customerBody bo.Customer
 
-	var Body struct {
-		Name      string
-		Age       int
-		Email     string
-		Gender    string
-		IsDeleted bool
-	}
-
-	c.Bind(&Body)
+	c.Bind(&customerBody)
 
 	initializers.DB.First(&customer, "id = ?", id)
 	//Update the fetched record and persist back
-	customer.Name = Body.Name
-	customer.Age = Body.Age
-	customer.Email = Body.Email
-	customer.Gender = Body.Gender
-	customer.IsDeleted = Body.IsDeleted
+	customer.Name = customerBody.Name
+	customer.Age = customerBody.Age
+	customer.Email = customerBody.Email
+	customer.Gender = customerBody.Gender
+	customer.IsDeleted = customerBody.IsDeleted
 
 	initializers.DB.Save(&customer)
 
@@ -94,13 +85,11 @@ func UpdatePaymentToFailed(clientsecret string) {
 
 func DeleteCustomerById(id string, c *gin.Context) {
 	var customer models.Customer
-
 	initializers.DB.Where("id = ?", id).Delete(&customer)
 }
 
 func PersistPaymentInDB(Name string, Courses string, Bill int, Date string, c *gin.Context) {
 	payment := models.Payment{Name: Name, Courses: Courses, Bill: Bill, Date: Date}
-
 	result := initializers.DB.Create(&payment)
 
 	if result.Error != nil {
@@ -115,7 +104,6 @@ func PersistPaymentInDB(Name string, Courses string, Bill int, Date string, c *g
 
 func InitiatePayment(Name string, Courses string, Bill int, Date string, Status string, ClientSecret string) {
 	payment := models.Payment{Name: Name, Courses: Courses, Bill: Bill, Date: Date, Status: Status, ClientSecret: ClientSecret}
-
 	result := initializers.DB.Create(&payment)
 
 	if result.Error != nil {
@@ -129,7 +117,6 @@ func InitiatePayment(Name string, Courses string, Bill int, Date string, Status 
 
 func GetPaymentsByName(name string, c *gin.Context) {
 	var payments []models.Payment
-
 	initializers.DB.Where("name = ? AND status = ?", name, "Success").Find(&payments)
 
 	c.JSON(http.StatusOK, gin.H{

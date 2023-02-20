@@ -19,7 +19,7 @@ function AddCourseModal({ setCourseModalOpen }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios
-           .post('https://fullstackwebapplication-server-nvywvuaozq-uc.a.run.app/addcourse', {
+           .post('https://fullstackwebapplication-server-nvywvuaozq-uc.a.run.app/course', {
             
             name: name,
             instructorName: instructorName,

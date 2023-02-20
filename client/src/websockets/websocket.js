@@ -1,4 +1,4 @@
-const socket = new WebSocket('ws://localhost:8081/makepayment');
+const socket = new WebSocket('ws://localhost:8081/payment');
 
 let connect = () => {
   console.log("Attempting Connection...");

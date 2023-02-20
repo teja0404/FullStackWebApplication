@@ -22,24 +22,23 @@ func HandleRequests() {
 	r.POST("/webhooks/stripe", service.HandleStripeWebhook)
 
 	//Controllers related to Customers
-	r.POST("/addcustomer", service.AddCustomer)
-	r.GET("/getallcustomers", service.GetAllCustomers)
-	r.GET("/getcustomerbyid/:id", service.GetCustomerById)
-	r.PUT("/updatecustomerbyid/:id", service.UpdateCustomerById)
-	r.DELETE("/deletecustomerbyid/:id", service.DeleteCustomerById)
-	r.GET("/getclientsecret", service.GetClientSecret)
-	r.POST("/makepayment", service.MakePayment)
-	r.GET("/getpaymentsbyname/:name", service.GetPaymentsByName)
+	r.POST("/customer", service.AddCustomer)
+	r.GET("/customers", service.GetAllCustomers)
+	r.GET("/customer/:id", service.GetCustomerById)
+	r.PUT("/customer/:id", service.UpdateCustomerById)
+	r.DELETE("/customer/:id", service.DeleteCustomerById)
+	r.GET("/clientsecret", service.GetClientSecret)
+	r.POST("/payment", service.MakePayment)
+	r.GET("/payment/:name", service.GetPaymentsByName)
 
 	//Controllers related to Course
 	//Only admin can add the Course
-	r.POST("/addcourse", service.AddCourse)
-	r.GET("/getallcourses", service.GetAllCourses)
-	r.GET("/getcoursebyid/:id", service.GetCourseById)
-	r.PUT("/updatecoursebyid/:id", service.UpdateCourseById)
-	r.DELETE("/deletecoursebyid/:id", service.DeleteCourseById)
+	r.POST("/course", service.AddCourse)
+	r.GET("/courses", service.GetAllCourses)
+	r.GET("/course/:id", service.GetCourseById)
+	r.PUT("/course/:id", service.UpdateCourseById)
+	r.DELETE("/course/:id", service.DeleteCourseById)
 
 	//Runs on the Port which we configured in Env file
 	r.Run()
-
 }

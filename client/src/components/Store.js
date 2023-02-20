@@ -60,7 +60,7 @@ const Store = () => {
       };
     
     function getAllOrders(){
-        var url = "https://fullstackwebapplication-server-nvywvuaozq-uc.a.run.app/getallcourses"
+        var url = "https://fullstackwebapplication-server-nvywvuaozq-uc.a.run.app/courses"
         axios.get(url, {
             responseType: 'json'
         }).then(response => {

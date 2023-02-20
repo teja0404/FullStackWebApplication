@@ -2,6 +2,7 @@ package repository
 
 import (
 	"net/http"
+	"server/bo"
 	"server/initializers"
 	"server/models"
 
@@ -11,9 +12,7 @@ import (
 func GetAllCoursesFromDB(c *gin.Context) {
 
 	var allCourses []models.Course
-
 	initializers.DB.Find(&allCourses)
-
 	c.JSON(http.StatusOK, gin.H{
 		"allCourses": allCourses,
 	})
@@ -21,9 +20,7 @@ func GetAllCoursesFromDB(c *gin.Context) {
 
 func GetCourseByIdFromDB(id string, c *gin.Context) {
 	var course models.Course
-
 	initializers.DB.First(&course, "id = ?", id)
-
 	c.JSON(http.StatusOK, gin.H{
 		"course": course,
 	})
@@ -31,26 +28,18 @@ func GetCourseByIdFromDB(id string, c *gin.Context) {
 
 func UpdateCourseInDBById(id string, c *gin.Context) {
 	var course models.Course
+	var courseBody bo.Course
 
-	var Body struct {
-		Name           string
-		InstructorName string
-		Price          int
-		Description    string
-		Duration       int
-	}
-
-	c.Bind(&Body)
+	c.Bind(&courseBody)
 
 	initializers.DB.First(&course, "id = ?", id)
-	course.Name = Body.Name
-	course.InstructorName = Body.InstructorName
-	course.Price = Body.Price
-	course.Description = Body.Description
-	course.Duration = Body.Duration
+	course.Name = courseBody.Name
+	course.InstructorName = courseBody.InstructorName
+	course.Price = courseBody.Price
+	course.Description = courseBody.Description
+	course.Duration = courseBody.Duration
 
 	initializers.DB.Save(&course)
-
 	c.JSON(http.StatusOK, gin.H{
 		"course": course,
 	})
@@ -59,6 +48,5 @@ func UpdateCourseInDBById(id string, c *gin.Context) {
 
 func DeleteCourseById(id string, c *gin.Context) {
 	var course models.Course
-
 	initializers.DB.Where("id = ?", id).Delete(&course)
 }

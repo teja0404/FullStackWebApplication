@@ -18,13 +18,12 @@ func HealthCheck(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"ping": "Fullstack Application BE is running",
 	})
-
 }
 
 func AddCourse(c *gin.Context) {
-	var requestbody bo.Requestbody
-	c.Bind(&requestbody)
-	repository.AddCourseInDB(requestbody.Name, requestbody.InstructorName, requestbody.Price, requestbody.Description, requestbody.Duration, c)
+	var course bo.Course
+	c.Bind(&course)
+	repository.AddCourseInDB(course.Name, course.InstructorName, course.Price, course.Description, course.Duration, c)
 }
 
 func HandleStripeWebhook(c *gin.Context) {

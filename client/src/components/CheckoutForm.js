@@ -55,15 +55,6 @@ export default function CheckoutForm({ cartTotal, finalCourses, name }) {
       return;
     }
 
-    setIsLoading(true);
-  
-    const result  = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: "http://localhost:3000/paymentsuccess",
-      },
-    });
-
     setIsLoading(false);
   };
 

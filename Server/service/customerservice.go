@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"server/bo"
 	"server/repository"
 	"time"
 
@@ -26,15 +27,10 @@ var upgrader = websocket.Upgrader{
 }
 
 func AddCustomer(c *gin.Context) {
-	var requestbody struct {
-		Name   string
-		Age    int
-		Email  string
-		Gender string
-	}
+	var customer bo.Customer
 
-	c.Bind(&requestbody)
-	repository.AddCustomerInDB(requestbody.Name, requestbody.Age, requestbody.Email, requestbody.Gender, c)
+	c.Bind(&customer)
+	repository.AddCustomerInDB(customer.Name, customer.Age, customer.Email, customer.Gender, c)
 }
 
 func GetAllCustomers(c *gin.Context) {
@@ -64,13 +60,7 @@ func GetClientSecret(c *gin.Context) {
 		return
 	}
 
-	type Requestbody struct {
-		Name    string
-		Bill    int
-		Courses string
-	}
-
-	var requestbody Requestbody
+	var payment bo.Payment
 
 	for {
 		messageType, p, err := ws.ReadMessage()
@@ -79,15 +69,15 @@ func GetClientSecret(c *gin.Context) {
 			return
 		}
 
-		jsonErr := json.Unmarshal([]byte(string(p)), &requestbody)
+		jsonErr := json.Unmarshal([]byte(string(p)), &payment)
 		if jsonErr != nil {
 			log.Println(jsonErr)
 		}
-		fmt.Println(requestbody.Bill)
+		fmt.Println(payment.Bill)
 
 		// Create a PaymentIntent with amount and currency
 		params := &stripe.PaymentIntentParams{
-			Amount:   stripe.Int64(int64(requestbody.Bill * 100)),
+			Amount:   stripe.Int64(int64(payment.Bill * 100)),
 			Currency: stripe.String(string(stripe.CurrencyINR)),
 			AutomaticPaymentMethods: &stripe.PaymentIntentAutomaticPaymentMethodsParams{
 				Enabled: stripe.Bool(true),
@@ -102,7 +92,7 @@ func GetClientSecret(c *gin.Context) {
 		}
 
 		ws.WriteMessage(messageType, []byte(pi.ClientSecret))
-		initiatePayment(requestbody.Name, requestbody.Courses, requestbody.Bill, "Processing", pi.ClientSecret)
+		initiatePayment(payment.Name, payment.Courses, payment.Bill, "Processing", pi.ClientSecret)
 	}
 }
 
@@ -113,18 +103,13 @@ func initiatePayment(Name string, Courses string, Bill int, Status string, Clien
 }
 
 func MakePayment(c *gin.Context) {
+	var payment bo.Payment
 
-	type Requestbody struct {
-		Name    string
-		Bill    int
-		Courses string
-	}
-	var requestbody Requestbody
 	dt := time.Now()
 	//Format date
 	var date = dt.Format(time.UnixDate)
-	c.Bind(&requestbody)
-	repository.PersistPaymentInDB(requestbody.Name, requestbody.Courses, requestbody.Bill, date, c)
+	c.Bind(&payment)
+	repository.PersistPaymentInDB(payment.Name, payment.Courses, payment.Bill, date, c)
 }
 
 func GetPaymentsByName(c *gin.Context) {

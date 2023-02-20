@@ -13,7 +13,7 @@ function Modal({ setOpenModal, cartTotal, finalCourses, name }) {
   const [receivedSecret, setReceivedSecret] = useState(false);
   const [clientSecret, setClientSecret] = useState("");
 
-  const socket = new WebSocket("wss://fullstackwebapplication-server-nvywvuaozq-uc.a.run.app/getclientsecret");
+  const socket = new WebSocket("wss://fullstackwebapplication-server-nvywvuaozq-uc.a.run.app/clientsecret");
 
   let connect = () => {
     console.log("Attempting Connection...");
