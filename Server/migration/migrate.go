@@ -1,8 +1,13 @@
 package migration
 
 import (
+	"log"
+	"os"
 	"server/initializers"
-	"server/models"
+
+	"github.com/golang-migrate/migrate/v4"
+	_ "github.com/golang-migrate/migrate/v4/database/postgres"
+	_ "github.com/golang-migrate/migrate/v4/source/file"
 )
 
 //This is similar to Flyway migration for SpringBoot
@@ -13,8 +18,14 @@ func MigrateDatabases() {
 		initializers.DB = initializers.EstablishDBConnection()
 	}
 
-	//Once the Connection is established, migration will be done.
-	initializers.DB.AutoMigrate(&models.Customer{})
-	initializers.DB.AutoMigrate(&models.Course{})
-	initializers.DB.AutoMigrate(&models.Payment{})
+	m, err := migrate.New(
+		os.Getenv("DB_MIGRATION_URL"),
+		os.Getenv("DB_MIGRATION_SCRIPTS_PATH"))
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	if err := m.Up(); err != nil {
+		log.Fatal(err)
+	}
 }

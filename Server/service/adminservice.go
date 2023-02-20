@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"server/bo"
 	"server/repository"
 
 	"github.com/tidwall/gjson"
@@ -20,16 +21,8 @@ func HealthCheck(c *gin.Context) {
 
 }
 
-type Requestbody struct {
-	Name           string
-	InstructorName string
-	Price          int
-	Description    string
-	Duration       int
-}
-
 func AddCourse(c *gin.Context) {
-	var requestbody Requestbody
+	var requestbody bo.Requestbody
 	c.Bind(&requestbody)
 	repository.AddCourseInDB(requestbody.Name, requestbody.InstructorName, requestbody.Price, requestbody.Description, requestbody.Duration, c)
 }
@@ -49,8 +42,6 @@ func HandleStripeWebhook(c *gin.Context) {
 		c.AbortWithStatus(http.StatusBadRequest)
 		return
 	}
-
-	fmt.Println(os.Getenv("STRIPE_WEBHOOK_SECRET"))
 
 	// Verify the webhook signature using your Stripe webhook secret
 	event, err := webhook.ConstructEvent(payload, sigHeader, os.Getenv("STRIPE_WEBHOOK_SECRET"))
