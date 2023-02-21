@@ -27,8 +27,6 @@ function Modal({ setOpenModal, cartTotal, finalCourses, name }) {
     };
 
     socket.onmessage = (msg) => {
-      console.log("Received the below message from server");
-      console.log(msg.data);
       if (msg.data != null) {
         setClientSecret(msg.data);
         setReceivedSecret(true);

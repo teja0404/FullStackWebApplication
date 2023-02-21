@@ -11,8 +11,8 @@ import (
 
 func init() {
 	initializers.LoadEnvVariables()
+	initializers.InitializeDatabase()
 	migration.MigrateDatabases()
-
 }
 
 func main() {

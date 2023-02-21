@@ -55,6 +55,15 @@ export default function CheckoutForm({ cartTotal, finalCourses, name }) {
       return;
     }
 
+    setIsLoading(true);
+
+    const result  = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: "https://fullstackwebapplication-client-nvywvuaozq-uc.a.run.app/paymentsuccess",
+      },
+    });
+
     setIsLoading(false);
   };
 

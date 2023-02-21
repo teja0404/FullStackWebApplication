@@ -100,11 +100,6 @@ function AddCourseModal({ setCourseModalOpen }) {
           >
             Cancel
           </button>
-          {/* <button onClick={() => {
-                setCourseModalOpen(false);
-            }}>
-            Ok
-          </button> */}
         </div>
       </div>
     </div>

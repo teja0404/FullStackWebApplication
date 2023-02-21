@@ -11,6 +11,13 @@ import (
 
 var DB *gorm.DB
 
+func InitializeDatabase() {
+	if DB == nil {
+		//This will establish the connection with DB
+		DB = EstablishDBConnection()
+	}
+}
+
 func EstablishDBConnection() (DB *gorm.DB) {
 	if DB != nil {
 		fmt.Println("DB connection is already established. Using the existing connection")
